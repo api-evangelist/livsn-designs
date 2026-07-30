@@ -1,7 +1,29 @@
 aid: livsn-designs
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/livsn-designs.png
 name: Livsn Designs
-description: Livsn Designs is a company surfaced as a portfolio company of techstars and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Livsn Designs is a Techstars-backed outdoor apparel brand that makes durable,
+  minimalist technical clothing (its Flex Canvas pants and multi-use travel and
+  hiking apparel) sold direct-to-consumer from a Shopify storefront at
+  livsndesigns.com. It publishes no first-party developer API or documentation
+  portal. Its only programmatic surface is the agent-commerce layer Shopify
+  serves on the merchant's own domain: a Universal Commerce Protocol (UCP)
+  shopping MCP endpoint for agent-driven checkout, a Shopify Customer Account
+  OIDC/OAuth2 authorization server, and an llms.txt / agents.md agent-instructions
+  document. This profile captures that real agent surface; there is no bespoke
+  API to catalog.
 url: https://raw.githubusercontent.com/api-evangelist/livsn-designs/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,9 +33,17 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
+- Retail
+- E-commerce
+- Apparel
+- Outdoor
+- Shopify
+- Agent Commerce
+- UCP
+- MCP
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -23,3 +53,25 @@ maintainers:
 common:
 - type: Website
   url: https://livsndesigns.com/
+- type: MCPServer
+  name: Livsn Designs UCP shopping MCP
+  url: mcp/livsn-designs-mcp.yml
+- type: WellKnown
+  url: well-known/livsn-designs-well-known.yml
+- type: LLMsTxt
+  url: llms/livsn-designs-llms.txt
+- type: Authentication
+  url: authentication/livsn-designs-authentication.yml
+- type: Conventions
+  url: conventions/livsn-designs-conventions.yml
+- type: DomainSecurity
+  url: security/livsn-designs-domain-security.yml
+- type: PrivacyPolicy
+  url: https://www.livsndesigns.com/policies/privacy-policy
+- type: TermsOfService
+  url: https://www.livsndesigns.com/policies/terms-of-service
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 9
+  pass: local-v1
