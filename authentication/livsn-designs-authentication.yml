@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.livsndesigns.com/.well-known/openid-configuration
+notes: >-
+  Livsn Designs publishes no first-party API, so there is no bespoke auth model.
+  The only authentication surface on the domain is the Shopify Customer Account
+  API OIDC/OAuth2 authorization server that Shopify serves per-merchant. Captured
+  verbatim from the merchant-scoped discovery document (issuer 27194140).
+summary:
+  types: [oauth2, openIdConnect]
+  oauth2_flows: [authorizationCode]
+  provider: Shopify Customer Account API
+schemes:
+  - name: shopify-customer-account
+    type: openIdConnect
+    provider: Shopify
+    issuer: https://shopify.com/authentication/27194140
+    authorization_endpoint: https://shopify.com/authentication/27194140/oauth/authorize
+    token_endpoint: https://shopify.com/authentication/27194140/oauth/token
+    end_session_endpoint: https://shopify.com/authentication/27194140/logout
+    jwks_uri: https://shopify.com/authentication/27194140/.well-known/jwks.json
+    grant_types_supported: [authorization_code, refresh_token, 'urn:ietf:params:oauth:grant-type:jwt-bearer']
+    response_types_supported: [code]
+    code_challenge_methods_supported: [S256]
+    id_token_signing_alg_values_supported: [RS256]
+    token_endpoint_auth_methods_supported: [client_secret_basic]
+    scopes_supported:
+      - openid
+      - email
+      - customer-account-api:full
+      - customer-account-mcp-api:full
+    source: well-known/livsn-designs-openid-configuration.json

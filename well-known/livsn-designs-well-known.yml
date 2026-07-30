@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.livsndesigns.com/
+host: https://www.livsndesigns.com
+notes: >-
+  Livsn Designs is a Shopify-hosted outdoor apparel merchant. It publishes no
+  first-party developer API, but its Shopify storefront exposes a real,
+  merchant-scoped agent-commerce surface on its own domain: a Customer Account
+  OIDC/OAuth authorization server, an llms.txt / agents.md agent-instructions
+  doc, and a Universal Commerce Protocol (UCP) merchant profile whose MCP
+  endpoint drives agent-driven checkout. Documents below were fetched verbatim.
+documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: livsn-designs-openid-configuration.json
+    note: Shopify Customer Account API OIDC discovery (issuer scoped to merchant 27194140; MCP scopes present)
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: livsn-designs-oauth-authorization-server.json
+    note: RFC 8414 authorization-server metadata (same Shopify Customer Account issuer)
+  - path: /.well-known/ucp
+    status: 200
+    file: livsn-designs-ucp.json
+    note: Universal Commerce Protocol merchant profile (MCP + embedded transports, checkout/cart/catalog/fulfillment capabilities, payment handlers)
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    file: ../llms/livsn-designs-llms.txt
+    note: Agent-instructions doc for the store (mirrors /agents.md)
+  - path: /agents.md
+    status: 200
+    note: Canonical agent-facing store description (content mirrored by /llms.txt)

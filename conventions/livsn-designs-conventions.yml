@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.livsndesigns.com/llms.txt
+notes: >-
+  Cross-cutting agent-interaction semantics for the Livsn Designs Shopify
+  storefront, transcribed from the store's published /llms.txt and
+  /.well-known/ucp. These govern the UCP shopping MCP surface, not a
+  first-party REST API (Livsn publishes none). No idempotency contract is
+  documented, so no Idempotency pointer is emitted.
+authentication:
+  browsing: none (read-only product/collection JSON is unauthenticated)
+  transacting: agent profile URI + buyer approval; buyer identity via Shopify Customer Account OIDC
+agent_flow:
+  - discover: GET /.well-known/ucp to confirm capabilities
+  - search: search_catalog
+  - cart: create_cart
+  - checkout: create_checkout
+  - fulfill: update_checkout (set shipping address and method)
+  - complete: complete_checkout (buyer must approve payment)
+buyer_context:
+  required_params: [context.address_country, context.currency]
+  note: pass for accurate pricing and availability
+human_in_the_loop:
+  checkout_requires_human_approval: true
+  rule: >-
+    Agents must not complete payment without explicit contemporaneous buyer
+    consent; otherwise route the purchase through the Shop skill / Shop Pay.
+rate_limiting:
+  scope: per-IP on the MCP endpoint
+  signal: HTTP 429
+  guidance: back off on 429 responses
+read_only_browsing:
+  products_json: GET /products/{handle}.json
+  collection_json: GET /collections/{handle}/products.json
+  search: GET /search?q={query}&type=product
+  sitemap: GET /sitemap.xml
+versioning:
+  scheme: dated UCP protocol versions
+  current: '2026-04-08'
+  supported: ['2026-04-08', '2026-01-23']
+cross_links:
+  authentication: authentication/livsn-designs-authentication.yml
+  mcp: mcp/livsn-designs-mcp.yml
+  well_known: well-known/livsn-designs-well-known.yml
