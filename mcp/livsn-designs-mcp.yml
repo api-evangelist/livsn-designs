@@ -2,46 +2,51 @@ generated: '2026-07-20'
 method: searched
 status: published
 source: https://www.livsndesigns.com/.well-known/ucp
-notes: >-
-  Livsn Designs runs no first-party MCP server, but its Shopify storefront
-  exposes a live Universal Commerce Protocol (UCP) shopping MCP endpoint for
-  agent-driven commerce. Discovered via /.well-known/ucp and documented in
-  /llms.txt. A tools/list probe requires an agent profile URI, so the tool
-  list below is transcribed from the store's published /llms.txt agent flow
-  (verbatim tool names) rather than fabricated.
+notes: Livsn Designs runs no first-party MCP server, but its Shopify storefront exposes a live Universal
+  Commerce Protocol (UCP) shopping MCP endpoint for agent-driven commerce. Discovered via /.well-known/ucp
+  and documented in /llms.txt. A tools/list probe requires an agent profile URI, so the tool list below
+  is transcribed from the store's published /llms.txt agent flow (verbatim tool names) rather than fabricated.
 server:
   name: livsn-designs-ucp-shopping
   protocol: UCP (Universal Commerce Protocol)
   ucp_version: '2026-04-08'
-  supported_versions: ['2026-04-08', '2026-01-23']
+  supported_versions:
+  - '2026-04-08'
+  - '2026-01-23'
   transport: mcp
   url: https://www.livsndesigns.com/api/ucp/mcp
   alt_url: https://livsn.myshopify.com/api/ucp/mcp
   spec: https://ucp.dev/2026-04-08/specification/overview/
   schema: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
-  auth: >-
-    Read/browse is unauthenticated; transacting requires an agent profile URI
-    and buyer approval. Buyer accounts authenticate via the Shopify Customer
-    Account OIDC issuer (see authentication/livsn-designs-authentication.yml).
+  auth: Read/browse is unauthenticated; transacting requires an agent profile URI and buyer approval.
+    Buyer accounts authenticate via the Shopify Customer Account OIDC issuer (see authentication/livsn-designs-authentication.yml).
   rate_limited: true
   human_approval_required: true
 tools:
-  - name: search_catalog
-    description: Find products matching the buyer's intent.
-    source: llms.txt agent flow / dev.ucp.shopping.catalog.search
-  - name: create_cart
-    description: Add desired items to a cart.
-    source: llms.txt agent flow / dev.ucp.shopping.cart
-  - name: create_checkout
-    description: Start the purchase flow.
-    source: llms.txt agent flow / dev.ucp.shopping.checkout
-  - name: update_checkout
-    description: Set shipping address and method.
-    source: llms.txt agent flow / dev.ucp.shopping.fulfillment
-  - name: complete_checkout
-    description: Finalize the purchase (buyer must approve payment).
-    source: llms.txt agent flow / dev.ucp.shopping.checkout
+- name: search_catalog
+  description: Find products matching the buyer's intent.
+  source: llms.txt agent flow / dev.ucp.shopping.catalog.search
+- name: create_cart
+  description: Add desired items to a cart.
+  source: llms.txt agent flow / dev.ucp.shopping.cart
+- name: create_checkout
+  description: Start the purchase flow.
+  source: llms.txt agent flow / dev.ucp.shopping.checkout
+- name: update_checkout
+  description: Set shipping address and method.
+  source: llms.txt agent flow / dev.ucp.shopping.fulfillment
+- name: complete_checkout
+  description: Finalize the purchase (buyer must approve payment).
+  source: llms.txt agent flow / dev.ucp.shopping.checkout
 payment_handlers:
-  - dev.shopify.shop_pay
-  - dev.shopify.card
-  - google_pay
+- dev.shopify.shop_pay
+- dev.shopify.card
+- google_pay
+deployment:
+  mode: remote
+  endpoint: https://www.livsndesigns.com/api/ucp/mcp
+  verified: probed
+  probe: live
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census
