@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/livsn-designs/integrations
+- https://n8n.io/integrations/livsn-designs/
+- https://composio.dev/toolkits/livsn-designs
+- https://monid.ai/tools/livsn-designs
+checked:
+- https://composio.dev/toolkits/livsn-designs
+- https://monid.ai/tools/livsn-designs
+- https://n8n.io/integrations/livsn-designs/
+- https://zapier.com/apps/livsn-designs/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
